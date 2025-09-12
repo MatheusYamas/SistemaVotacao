@@ -13,7 +13,8 @@ class PollController extends Controller
      */
     public function index()
     {
-        //
+        $polls = poll::latest()->get();
+        return view('polls.index', compact('polls'));
     }
 
     /**
@@ -21,7 +22,7 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        return view('polls.create');
     }
 
     /**
@@ -29,7 +30,27 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'options' => 'required|array|min:3',
+            'options.*' => 'required|string|max:255',
+            'data_inicio' => 'nullable|date',
+            'data_termino' => 'nullable|date|after_or_equal:data_inicio',
+        ]);
+
+        $poll = Poll::create([
+            'title' => $validated['title'],
+            'data_inicio' => $validated['data_inicio'],
+            'data_termino' => $validated['data_termino'],
+        ]);
+
+        foreach ($validated['options'] as $optionName){
+            if (!empty($optionName)){
+                $poll->options()->create(['name' => $optionName]);
+            }
+        }
+
+        return redirect()->route('polls.index')->with('sucess', 'Enquete criada');
     }
 
     /**
@@ -37,7 +58,8 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        //
+        $poll->load('options');
+        return view('polls.show', compact('poll'));
     }
 
     /**
