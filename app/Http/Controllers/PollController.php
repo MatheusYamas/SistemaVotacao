@@ -34,8 +34,8 @@ class PollController extends Controller
             'title' => 'required|string|max:255',
             'options' => 'required|array|min:3',
             'options.*' => 'required|string|max:255',
-            'data_inicio' => 'nullable|date',
-            'data_termino' => 'nullable|date|after_or_equal:data_inicio',
+            'data_inicio' => 'required|date',
+            'data_termino' => 'required|date|after_or_equal:data_inicio',
         ]);
 
         $poll = Poll::create([
@@ -67,7 +67,8 @@ class PollController extends Controller
      */
     public function edit(Poll $poll)
     {
-        //
+        $poll->load('options');
+        return view('polls.edit', compact('poll'));
     }
 
     /**
@@ -75,7 +76,29 @@ class PollController extends Controller
      */
     public function update(Request $request, Poll $poll)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'options' => 'required|array|min:3',
+            'options.*' => 'required|string|max:255',
+            'data_inicio' => 'required|date',
+            'data_termino' => 'required|date|after_or_equal:data_inicio',
+        ]);
+
+        $poll->update([
+            'title' =>$validated['title'],
+            'data_inicio' =>$validated['data_inicio'],
+            'data_termino' =>$validated['data_termino'],
+        ]);
+
+        $poll->options()->delete();
+
+        foreach ($validated['options'] as $optionName){
+            if (!empty($optionName)){
+                $poll->options()->create(['name' => $optionName]);
+            }
+        }
+
+        return redirect()->route('polls.index')->with('success', 'Enquete atualizada');
     }
 
     /**

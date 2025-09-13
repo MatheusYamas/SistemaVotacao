@@ -10,12 +10,12 @@
 
         <div class="row mb-3">
             <div class="col">
-                <label for="data_inicio" class="form-label">Data de Início (opcional)</label>
-                <input type="datetime-local" class="form-control" id="data_inicio" name="data_inicio" value="{{ old('data_inicio') }}">
+                <label for="data_inicio" class="form-label">Data de Início</label>
+                <input type="datetime-local" class="form-control" id="data_inicio" name="data_inicio" required value="{{ old('data_inicio') }}">
             </div>
             <div class="col">
-                <label for="data_termino" class="form-label">Data de Fim (opcional)</label>
-                <input type="datetime-local" class="form-control" id="data_termino" name="data_termino" value="{{ old('data_termino') }}">
+                <label for="data_termino" class="form-label">Data de Fim</label>
+                <input type="datetime-local" class="form-control" id="data_termino" name="data_termino" required value="{{ old('data_termino') }}">
             </div>
         </div>
 
