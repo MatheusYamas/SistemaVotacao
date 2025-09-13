@@ -34,6 +34,7 @@
                     <h5 class="badge {{ $statusClass }}">{{ $poll->status }}</h5>
                 <a href="{{ route('polls.show', $poll) }}" class="btn btn-secondary">Ver e Votar</a>
                 <a href="{{ route('polls.edit', $poll) }}" class="btn btn-secondary">Editar</a>
+                <a href="{{ route('polls.confirmDelete', $poll) }}" class="btn btn-danger btn-sm">Deletar</a>
             </div>
         </div>
     @empty

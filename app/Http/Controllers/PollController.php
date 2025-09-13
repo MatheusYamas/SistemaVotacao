@@ -98,7 +98,12 @@ class PollController extends Controller
             }
         }
 
-        return redirect()->route('polls.index')->with('success', 'Enquete atualizada');
+        return redirect()->route('polls.index')->with('success', 'Enquete Atualizada');
+    }
+
+    public function confirmDelete(Poll $poll)
+    {
+        return view('polls.confirmDelete', compact('poll'));
     }
 
     /**
@@ -106,6 +111,7 @@ class PollController extends Controller
      */
     public function destroy(Poll $poll)
     {
-        //
+        $poll->delete();
+        return redirect()->route('polls.index')->with('success', 'Enquete Deletada');
     }
 }
