@@ -13,7 +13,7 @@ class PollController extends Controller
      */
     public function index()
     {
-        $polls = poll::latest()->get();
+        $polls = Poll::latest()->get();
         return view('polls.index', compact('polls'));
     }
 
@@ -39,9 +39,9 @@ class PollController extends Controller
         ]);
 
         $poll = Poll::create([
-            'title' => $validated['title'],
-            'data_inicio' => $validated['data_inicio'],
-            'data_termino' => $validated['data_termino'],
+            'title' =>$validated['title'],
+            'data_inicio' =>$validated['data_inicio'],
+            'data_termino' =>$validated['data_termino'],
         ]);
 
         foreach ($validated['options'] as $optionName){
@@ -50,7 +50,7 @@ class PollController extends Controller
             }
         }
 
-        return redirect()->route('polls.index')->with('sucess', 'Enquete criada');
+        return redirect()->route('polls.index')->with('success', 'Enquete criada');
     }
 
     /**

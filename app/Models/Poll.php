@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 
 class Poll extends Model
 {
@@ -13,7 +13,7 @@ class Poll extends Model
 
     protected $casts = ['data_inicio' => 'datetime', 'data_termino' => 'datetime'];
 
-    public function option(){
+    public function options(){
         return $this->hasMany(Option::class);
     }
 
