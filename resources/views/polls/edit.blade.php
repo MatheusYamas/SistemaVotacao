@@ -15,7 +15,7 @@
                 <input type="datetime-local" class="form-control" id="data_inicio" name="data_inicio" required value="{{ old('data_inicio', $poll->data_inicio ? $poll->data_inicio->format('Y-m-d\TH:i') : '') }}">
             </div>
             <div class="col">
-                <label for="data_termino" class="form-label">Data de Fim</label>
+                <label for="data_termino" class="form-label">Data de Término</label>
                 <input type="datetime-local" class="form-control" id="data_termino" name="data_termino" required value="{{ old('data_termino', $poll->data_termino ? $poll->data_termino->format('Y-m-d\TH:i') : '') }}">
             </div>
         </div>

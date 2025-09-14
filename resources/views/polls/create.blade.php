@@ -14,7 +14,7 @@
                 <input type="datetime-local" class="form-control" id="data_inicio" name="data_inicio" required value="{{ old('data_inicio') }}">
             </div>
             <div class="col">
-                <label for="data_termino" class="form-label">Data de Fim</label>
+                <label for="data_termino" class="form-label">Data do Término</label>
                 <input type="datetime-local" class="form-control" id="data_termino" name="data_termino" required value="{{ old('data_termino') }}">
             </div>
         </div>
